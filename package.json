@@ -13,8 +13,9 @@
   },
   "dependencies": {
     "bitsyntax": "~0.0.4",
-    "bluebird": "^3.4.6",
     "buffer-more-ints": "0.0.2",
+    "p-try": "^2.0.0",
+    "pify": "^4.0.0",
     "readable-stream": "1.x >=1.1.9",
     "safe-buffer": "^5.0.1",
     "url-parse": "^1.2.0"

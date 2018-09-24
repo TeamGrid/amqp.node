@@ -6,7 +6,7 @@ var util = require('./util');
 var succeed = util.succeed, fail = util.fail;
 var schedule = util.schedule;
 var randomString = util.randomString;
-var Promise = require('bluebird');
+var Promise = require('../lib/nativePromise');
 var Buffer = require('safe-buffer').Buffer;
 
 var URL = process.env.URL || 'amqp://localhost';
@@ -39,7 +39,8 @@ function channel_test(chmethod, name, chfun) {
   test(name, function(done) {
     connect(URL).then(logErrors).then(function(c) {
       c[chmethod]().then(ignoreErrors).then(chfun)
-        .then(succeed(done), fail(done))
+        .then(succeed(done))
+        .catch(fail(done))
       // close the connection regardless of what happens with the test
         .finally(function() {c.close();});
     });
@@ -184,7 +185,10 @@ chtest("send to queue and get from queue", function(ch) {
       return waitForMessages(q);
     })
     .then(function() {
-      return ch.get(q, {noAck: true});
+      const p = ch.get(q, {noAck: true});
+      return p.then(a => {
+        return a
+      })
     })
     .then(function(m) {
       assert(m);

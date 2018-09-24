@@ -1,6 +1,6 @@
 'use strict';
 
-var Promise = require('bluebird');
+var Promise = require('../lib/nativePromise');
 var crypto = require('crypto');
 var Connection = require('../lib/connection').Connection;
 var PassThrough =

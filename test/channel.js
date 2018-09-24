@@ -3,7 +3,7 @@
 'use strict';
 
 var assert = require('assert');
-var Promise = require('bluebird');
+var Promise = require('../lib/nativePromise');
 var Channel = require('../lib/channel').Channel;
 var Connection = require('../lib/connection').Connection;
 var util = require('./util');

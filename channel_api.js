@@ -1,6 +1,6 @@
 var raw_connect = require('./lib/connect').connect;
 var ChannelModel = require('./lib/channel_model').ChannelModel;
-var Promise = require('bluebird');
+var Promise = require('./lib/nativePromise');
 
 function connect(url, connOptions) {
   return Promise.fromCallback(function(cb) {
